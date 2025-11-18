@@ -11,7 +11,6 @@ st.set_page_config(
     layout="centered",
 )
 
-
 # ------------------------
 # Helper: safe rerun for different Streamlit versions
 # ------------------------
@@ -352,7 +351,23 @@ page_bg = f"""
 </style>
 """
 st.markdown(page_bg, unsafe_allow_html=True)
+# ------------------------
+st.markdown(page_bg, unsafe_allow_html=True)
 
+# ------------------------
+# Background music (play at top of page)
+# ------------------------
+def load_bgm():
+    try:
+        with open("bgm_8bit_menu.mp3", "rb") as f:
+            return f.read()
+    except FileNotFoundError:
+        return None
+
+bgm_bytes = load_bgm()
+
+if bgm_bytes:
+    st.audio(bgm_bytes, format="audio/mp3", start_time=0)
 
 # ------------------------
 # INTRO PAGE
@@ -370,7 +385,7 @@ He kidnapped families 👨‍👩‍👧‍👦, turned sweet fruits 🍎🍉 in
 and pushed the animals 🐶🐱🐼 into a thick, swirling fog 😱...
 
 Now, **only you** can save the island.  
-Use your word power to defeat Lexor!
+Use your word power to defeat Lexor!🗡️
         """
     )
 
@@ -421,11 +436,13 @@ This used to be the peaceful place where you lived with your family.
 
 But **Lexor** has cast a spell and mixed your family into a pile of random words.  
 
-To open the village gate, you must find **all the real family members** hidden below.👀
-**Mission:**  
-- Select **all** the words that are *family members*.  
+To open the village gate, you must find **all the real family members** hidden below. 👀
 """
         )
+
+        st.markdown("**Mission:**")   # 不加粗
+        st.markdown("- Select **all** the words that are *family members*.")
+
 
         indices = list(range(len(options)))
         selected_indices = st.multiselect(
@@ -576,8 +593,8 @@ Only by finding the **real fruits** can you break the spell and bring color back
 
             if st.session_state.level2_is_correct:
                 st.success(
-                    "Amazing! 🍉🍌🍎  \n"
-                    "You pick out all the real fruits.  \n"
+                    "Amazing!🥳 \n"
+                    "You pick out all the real fruits🍉🍌🍎.  \n"
                     "The stone spell shatters, and the whole orchard comes back to life.  \n"
                     "You know that Lexor can't be far away now..."
                 )
@@ -606,7 +623,7 @@ Only by finding the **real fruits** can you break the spell and bring color back
 
             else:
                 st.error(
-                    "Oh no! 😭  \n"
+                    "Oh no!😥  \n"
                     "You also selected words that are **not** fruits.  \n"
                     "The magic backfires, the ground shakes, and you lose **one life**. ❤️ -1  \n\n"
                     "Think again: which words are fruits you can actually *eat*?"
@@ -703,7 +720,7 @@ If you don't find them, the animals will keep living in fear and confusion.
 
             if st.session_state.level3_is_correct:
                 st.success(
-                    "Great work, detective! 🕵️‍♀️  \n"
+                    "Nice work, detective! 🕵️‍♀️  \n"
                     "You spot both impostors hiding among the animals.  \n"
                     "The real animals cheer for you loudly, and the fog begins to fade. 👏  \n"
                     "Now you feel even more certain that you are getting closer to Lexor's lair..."
@@ -733,10 +750,10 @@ If you don't find them, the animals will keep living in fear and confusion.
 
             else:
                 st.error(
-                    "Uh-Oh...😔  \n"
-                    "You didn't catch both impostors at once. In the chaos, they strike back,  \n"
+                    "Mission failed, detective.🤦🏻‍♀️ \n\n"
+                    "You caught the wrong targets, the two real impostors slipped away, \n"
                     "and you lose **one life**. ❤️ -1  \n\n"
-                    "Try again — what *should* a real animal look like?"
+                    "Review the clues—Which words couldn’t possibly be animals? \n\n" 
                 )
 
                 st.markdown("**Correct impostors (the two words that are NOT animals):**")
@@ -791,7 +808,7 @@ From the crater, Chinese characters and pinyin shoot out like streams of fire.
 This place is guarded by the power of **actions** — **verbs**.
 
 Only by finding **all the action verbs** can you calm the volcano  
-and open a rocky path that leads deeper into the Word Island.⚡
+and open a rocky path that leads deeper into the Word Island.
 
 **Mission:**  
 - Select **all** the words that are **action verbs**.  
@@ -859,7 +876,7 @@ and open a rocky path that leads deeper into the Word Island.⚡
 
             else:
                 st.error(
-                    "Yikes! \n"
+                    "Uh-oh!🤯 \n"
                     "You chose some words that are not actions. The volcano erupts even higher 🌋,  \n"
                     "and a few sparks fly past you — you lose **one life**. ❤️ -1  \n\n"
                     "Think again: which words describe something you can actually **do**?"
@@ -911,7 +928,7 @@ and open a rocky path that leads deeper into the Word Island.⚡
 
         st.markdown(
             """
-At the end of the rocky path lies a giant **City Maze**. 🏠🏥🏫⛪ 
+At the end of the rocky path lies a giant **City Maze**. 🏙️ 
 Lexor has scrambled all the **places** in this city —  
 
 schools, hospitals, restaurants, homes... everything is lost and twisted.  
@@ -955,7 +972,7 @@ are **real places** that you can actually go to.
 
             if st.session_state.level5_is_correct:
                 st.success(
-                    "The map lights up! ✨  \n"
+                    "Hooray!The map lights up! ✨🌃 \n\n"
                     "Each time you pick a real place, that part of the city becomes clear.  \n"
                     "Finally, the whole city map glows softly, showing a shining **Time Tunnel** ahead."
                 )
@@ -984,7 +1001,7 @@ are **real places** that you can actually go to.
 
             else:
                 st.error(
-                    "The city goes dark again...😟  \n"
+                    "The city goes dark again...🫨 \n"
                     "You selected some words that are **not** places.  \n"
                     "Street signs spin around, streetlights go out, and you lose **one life**. ❤️ -1  \n\n"
                     "Look again: which words are places you can actually **go to**?"
@@ -1012,8 +1029,131 @@ are **real places** that you can actually go to.
                         st.session_state.page = "intro"
                         reset_game_state()
                         do_rerun()
+    # ------------- LEVEL 6: TIME TUNNEL -------------
+    elif st.session_state.level == 6:
 
+        if "level6_show_result" not in st.session_state:
+            st.session_state.level6_show_result = False
+        if "level6_is_correct" not in st.session_state:
+            st.session_state.level6_is_correct = False
+        if "level6_correct_words" not in st.session_state:
+            st.session_state.level6_correct_words = []
 
+        if "time_options" not in st.session_state:
+            options, correct_set = generate_time_question()
+            st.session_state.time_options = options
+            st.session_state.time_correct = correct_set
+
+        options = st.session_state.time_options
+        correct_set = st.session_state.time_correct
+
+        st.markdown("### ⏳ Level 6 · Time Tunnel")
+        st.markdown(f"**Explorer:** {name}  |  ❤️ Lives: **{st.session_state.lives}**")
+
+        st.markdown(
+            """
+After crossing the city, you stand before a glowing **Time Tunnel**🕐.  
+All kinds of **time words** float in the air —  
+
+Lexor is trying to use **chaotic time** to stop you from going forward.
+
+Only by recognizing the **real time words**  
+can you pass through the tunnel and reach the heart of the Word Island✨.
+
+**Mission:**  
+- Select **all** the words that are **time words**.  
+"""
+        )
+
+        indices = list(range(len(options)))
+        selected_indices = st.multiselect(
+            "👇 From the 4 words below, choose **all** the time words:",
+            options=indices,
+            format_func=lambda i: f"{options[i]['hanzi']}  {options[i]['pinyin']}",
+        )
+
+        submit6_clicked = st.button("✅ Submit answer (Time Tunnel)")
+
+        if submit6_clicked:
+            if not selected_indices:
+                st.warning("Please select at least one word before submitting.")
+                st.session_state.level6_show_result = False
+            else:
+                selected_hanzi = {options[i]["hanzi"] for i in selected_indices}
+                correct_words = [w for w in options if w["hanzi"] in correct_set]
+
+                st.session_state.level6_correct_words = correct_words
+                st.session_state.level6_show_result = True
+
+                if selected_hanzi == correct_set:
+                    st.session_state.level6_is_correct = True
+                else:
+                    st.session_state.level6_is_correct = False
+                    st.session_state.lives = max(0, st.session_state.lives - 1)
+
+        if st.session_state.level6_show_result:
+            correct_words = st.session_state.level6_correct_words
+
+            if st.session_state.level6_is_correct:
+                st.success(
+                    "The Time Tunnel turns into a stable road of light,🪄  \n"
+                    "carrying you straight toward the **Career Town** —  \n"
+                    "the place where people live and work.👩🏻‍🚀🧑🏻‍💻👩🏻‍🎓"
+                )
+
+                st.markdown("**Time words in this question:**")
+                for w in correct_words:
+                    st.markdown(f"- {w['hanzi']}  {w['pinyin']}  ({w['english']})")
+
+                if st.button("🧑‍⚕️ Go to Level 7: Career Town"):
+                    st.session_state.level = 7
+                    for key in [
+                        "time_options", "time_correct",
+                        "level6_show_result", "level6_is_correct",
+                        "level6_correct_words",
+                    ]:
+                        if key in st.session_state:
+                            del st.session_state[key]
+                    do_rerun()
+
+                if st.button("🔁 Try another Time Tunnel question"):
+                    options, correct_set = generate_time_question()
+                    st.session_state.time_options = options
+                    st.session_state.time_correct = correct_set
+                    st.session_state.level6_show_result = False
+                    do_rerun()
+
+            else:
+                st.error(
+                    "Time is messed up!🫨  \n"
+                    "You chose some words that are not time expressions.  \n"
+                    "The timeline twists into a knot, a short storm of time swallows you,  \n"
+                    "and you lose **one life**. ❤️ -1  \n\n"
+                    "Think again: which words are like **today, tomorrow, now**?"
+                )
+
+                st.markdown("**Correct time words in this question:**")
+                for w in correct_words:
+                    st.markdown(f"- {w['hanzi']}  {w['pinyin']}  ({w['english']})")
+
+                st.markdown(f"Remaining lives: **{st.session_state.lives} ❤️**")
+
+                if st.session_state.lives > 0:
+                    if st.button("🔁 Try another Time Tunnel question"):
+                        options, correct_set = generate_time_question()
+                        st.session_state.time_options = options
+                        st.session_state.time_correct = correct_set
+                        st.session_state.level6_show_result = False
+                        do_rerun()
+                else:
+                    st.warning(
+                        "Your lives are all gone in the Time Tunnel...  \n"
+                        "You can restart your adventure from the beginning."
+                    )
+                    if st.button("🔄 Restart from intro"):
+                        st.session_state.page = "intro"
+                        reset_game_state()
+                        do_rerun()
 
     # ------------- LEVEL 7: CAREER TOWN -------------
     elif st.session_state.level == 7:
@@ -1039,10 +1179,10 @@ are **real places** that you can actually go to.
         st.markdown(
             """
 You pass through the Time Tunnel and arrive at **Career Town**.  
-This town is where doctors, teachers, students and many others work and live. 🧑‍🏫🧑‍🍳👮‍♂️ 
+This town is where doctors, teachers, students and many others work and live.  
 
-But now their identities are all mixed up.  
-Only by finding the real **jobs**  
+But now their identities are all mixed up.😵‍💫  
+Only by finding the real **jobs / professions**  
 can the town return to normal and its people help you fight Lexor.
 
 **Mission:**  
@@ -1081,10 +1221,10 @@ can the town return to normal and its people help you fight Lexor.
 
             if st.session_state.level7_is_correct:
                 st.success(
-                    "Fantastic 🎉  \n"
+                    "Fantastic!😊  \n"
                     "You find all the real professions.  \n"
                     "The residents of Career Town decide to join you and chase Lexor together.  \n"
-                    "You take a deep breath — the **Final Trial** is waiting for you."
+                    "And the **Final Trial** is waiting for you..."
                 )
 
                 st.markdown("**Job words in this question:**")
@@ -1111,10 +1251,10 @@ can the town return to normal and its people help you fight Lexor.
 
             else:
                 st.error(
-                    "Not quite…  \n"
-                    "Lexor secretly messed with you👻, and you chose some words that are not jobs.  \n"
+                    "Yikes!😧 \n"
+                    "Lexor secretly messed with you, and you chose some words that are not jobs.  \n"
                     "You lose **one life**. ❤️ -1  \n\n"
-                    "Think: who is really **working**? Who is just a relationship or a title?"
+                    "Think again: who is really **working**? Who is just a relationship or a title?"
                 )
 
                 st.markdown("**Correct jobs / professions in this question:**")
@@ -1178,7 +1318,7 @@ All the words you’ve seen before — **family, fruits, animals, verbs, places,
 are now floating in the air, completely mixed together.  
 
 To defeat Lexor once and for all,  
-you must **sort these words back into their correct categories**.
+you must **sort these words back into their correct categories**.🤔
 
 **Mission:**  
 Classify each word into the correct category:  
@@ -1261,23 +1401,23 @@ Classify each word into the correct category:
             if st.session_state.final_is_correct_enough:
                 # ✅ Victory ending
                 st.success(
-                    "Victory! 🎉  \n"
+                    "Congratulations to your victory! 🎉  \n"
                     "Family members have returned to **Family Village**,  \n"
                     "fruits hang back on the trees in **Fruit Manor**,  \n"
                     "animals run freely in the zoo, **Career Town** is busy again,  \n"
                     "and time & places are all back on track.  \n\n"
                     "Lexor stares in shock:  \n"
-                    "\"Impossible! How can you remember all these words so clearly?!👺\"  \n"
+                    "\"Impossible!😡 How can you remember all these words so clearly?!\"  \n"
                     "His shadow slowly fades away in the light.  \n\n"
                     "The Word Island is peaceful again…  \n"
-                    "but your Chinese adventure has only just begun. 🌟"
+                    "but your Chinese learning adventure has only just begun. 🌟"
                 )
             else:
                 # ❌ Not enough to “defeat” Lexor, but can retry final trial
                 st.error(
                     "You fought bravely all the way here, but the spell is not fully broken yet…  \n"
                     "Some words were still in the wrong categories.  \n\n"
-                    "Press **Try the final trial again** to take this challenge one more time. ⛽ \n"
+                    "Press **Try the final trial again** to take this challenge one more time. ⛽💪 \n"
                     "Maybe next time, you'll remember even more words and go even further!"
                 )
 
@@ -1299,17 +1439,3 @@ Classify each word into the correct category:
                     i: "(Select category)" for i in range(len(st.session_state.final_words))
                 }
                 do_rerun()
-
-    # ------- common bottom: back to start -------
-    st.markdown("---")
-    if st.button("⬅ Back to start"):
-        st.session_state.page = "intro"
-        reset_game_state()
-        do_rerun()
-
-# ========================
-# Background music (global)
-# ========================
-
-# 如果你用的是网络上的 mp3 链接，可以改成这样：
-# st.audio("https://example.com/your_bgm.mp3", format="audio/mp3")
