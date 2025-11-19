@@ -1,2 +1,2 @@
 # Chinese-Vocab-Adventure
-http://localhost:8501/
+https://word-island-adventure.streamlit.app/
