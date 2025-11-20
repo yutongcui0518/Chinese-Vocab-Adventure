@@ -224,7 +224,7 @@ def generate_job_question():
     other_pool = [
         w
         for category, words in WORD_BANK.items()
-        if category != "job"       # ✅ 这里用 job，而不是 profession
+        if category != "job"      
         for w in words
     ]
     distractors = random.sample(other_pool, k=2)
@@ -440,7 +440,7 @@ To open the village gate, you must find **all the real family members** hidden b
 """
         )
 
-        st.markdown("**Mission:**")   # 不加粗
+        st.markdown("**Mission:**")   
         st.markdown("- Select **all** the words that are *family members*.")
 
 
@@ -1338,7 +1338,6 @@ Classify each word into the correct category:
         options_for_select = ["(Select category)"] + CATEGORY_OPTIONS
 
         for i, w in enumerate(words):
-            # ❗ 只显示汉字 + 拼音，不显示英文解释，避免“给答案”
             label = f"{w['hanzi']}  {w['pinyin']}"
 
             prev = st.session_state.final_answers.get(i, "(Select category)")
@@ -1399,7 +1398,6 @@ Classify each word into the correct category:
                 f"({correct_num}/{len(detailed_result)})"
             )
 
-            # 胜利 / 未完全胜利 两种结局
             if st.session_state.final_is_correct_enough:
                 # ✅ Victory ending
                 st.success(
@@ -1415,7 +1413,6 @@ Classify each word into the correct category:
                     "but your Chinese learning adventure has only just begun. 🌟"
                 )
             else:
-                # ❌ 还没完全打败 Lexor，可以重试最终关
                 st.error(
                     "You fought bravely all the way here, but the spell is not fully broken yet…  \n"
                     "Some words were still in the wrong categories.  \n\n"
@@ -1423,7 +1420,6 @@ Classify each word into the correct category:
                     "Maybe next time, you'll remember even more words and go even further!"
                 )
 
-            # ✅ 正确分类讲解（可以展示英文）
             st.markdown("### ✅ Correct categories")
             for item in detailed_result:
                 w = item["word"]
@@ -1434,12 +1430,11 @@ Classify each word into the correct category:
 
             st.markdown("---")
 
-            # 两个按钮：1. 重打 final trial；2. 从第 1 关重新冒险（保留姓名）
             col1, col2 = st.columns(2)
 
             with col1:
                 if st.button("🔁 Try the final trial again"):
-                    # 重新生成最终关，保持玩家名字不变
+            
                     st.session_state.final_words = generate_final_trial_words()
                     st.session_state.final_show_result = False
                     st.session_state.final_is_correct_enough = False
@@ -1451,9 +1446,8 @@ Classify each word into the correct category:
 
             with col2:
                 if st.button("🌈 Restart the whole adventure"):
-                    # 只重置关卡和生命等游戏状态，不清空玩家名字
-                    reset_game_state()            # lives=3, level=1, 清空各关卡状态
-                    st.session_state.page = "game" # 回到游戏界面（直接从 Level 1 开始）
+                    reset_game_state()            # lives=3, level=1
+                    st.session_state.page = "game"
                     do_rerun()
 
 # ------------------------
@@ -1468,3 +1462,4 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
