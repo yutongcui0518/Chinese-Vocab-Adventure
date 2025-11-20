@@ -1455,3 +1455,16 @@ Classify each word into the correct category:
                     reset_game_state()            # lives=3, level=1, 清空各关卡状态
                     st.session_state.page = "game" # 回到游戏界面（直接从 Level 1 开始）
                     do_rerun()
+
+# ------------------------
+# Footer: Copyright notice
+# ------------------------
+st.markdown(
+    """
+    <div style='text-align:center; font-size:0.8rem; color:#666; margin-top:2rem; padding-top:1rem;'>
+        © 2025 Yutong Cui (Carina). Chinese Word Island Adventure.<br>
+        For educational use only. Please do not copy, redistribute, or modify without permission.
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
