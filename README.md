@@ -25,6 +25,7 @@ Used by: load_word_bank_from_csv(), all generate_* functions.
 bgm_8bit_menu.mp3 (optional): background music file.
 Used by: load_bgm().
 
+
 2.2 External libraries
 streamlit – UI framework and session state.
 csv – loading the word bank.
@@ -41,6 +42,7 @@ layout="centered"
 
 Purpose:
 Provides consistent look and feel in the browser (tab title, icon, layout).
+
 
 3.2 Cross-version rerun helper
 def do_rerun():
@@ -103,6 +105,7 @@ Shuffles all 4 and returns:
 options = correct_words + distractors (shuffled).
 correct_set = {hanzi of correct_words}.
 
+
 5.2 Fruit (Level 2)
 
 Function:
@@ -113,6 +116,7 @@ Logic:
 Same pattern as Level 1:
 2 fruit words + 2 non-fruit distractors.
 Returns options and correct_set.
+
 
 5.3 Animal / Impostor Task (Level 3)
 
@@ -130,6 +134,7 @@ impostor_set = {hanzi of impostor words}.
 Purpose:
 Inverts the logic: player must find the two words that are NOT animals.
 
+
 5.4 Verb (Level 4)
 Function:
 def generate_verb_question():
@@ -138,6 +143,7 @@ def generate_verb_question():
 Logic:
 2 verb words + 2 non-verb distractors.
 Returns options, correct_set.
+
 
 5.5 Place (Level 5)
 Function:
@@ -148,6 +154,7 @@ Logic:
 2 place words + 2 non-place distractors.
 Returns options, correct_set.
 
+
 5.6 Time (Level 6)
 Function:
 def generate_time_question():
@@ -157,6 +164,7 @@ Logic:
 2 time words + 2 non-time distractors.
 Returns options, correct_set.
 
+
 5.7 Job (Level 7)
 Function:
 def generate_job_question():
@@ -165,6 +173,7 @@ def generate_job_question():
 Logic:
 2 job words + 2 non-job distractors.
 Returns options, correct_set.
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 6. Final Trial Word Generation (Level 8)
 Function:
@@ -215,6 +224,8 @@ if "lives" not in st.session_state:
 if "level" not in st.session_state:
     st.session_state.level = 1
 
+
+
 7.2 Resetting game state
 Function:
 def reset_game_state():
@@ -234,6 +245,8 @@ Final trial state (final_words, final_answers, final_detailed_result, final_accu
 
 Purpose:
 Ensures a truly clean restart, with no leftover data from previous runs.
+
+
 
 7.3 Page transition from intro → game
 Function:
@@ -279,6 +292,8 @@ st.markdown(page_bg, unsafe_allow_html=True)
 Purpose:
 Sets a full-page island background.
 Wraps the main content in a translucent card for readability.
+
+
 
 8.2 Background music
 Function:
@@ -326,6 +341,8 @@ Purpose:
 Introduce storyline.
 Collect player name and transition into the game.
 
+
+
 9.2 Levels 1–7 (Pattern)
 Each level block:
 Initializes level-specific state keys if missing:
@@ -368,6 +385,8 @@ st.error with story-based negative feedback and ❤️ -1.
 Shows correct answers.
 If lives > 0: allow retry with a new question.
 If lives == 0: show restart option (back to intro) and call reset_game_state().
+
+
 
 9.3 Level 8: Final Trial
 State:
