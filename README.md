@@ -447,3 +447,11 @@ st.markdown(
 
 Purpose:
 Adds a simple copyright and usage note at the bottom of the app.
+
+
+
+
+Takeaways from this project：
+This artifact demonstrates my learning on both the programming and design sides of the course. Technically, I moved from writing small, isolated scripts to building a full data-driven web app in Streamlit. I learned how to organize a larger codebase with clear helper functions (for loading data, generating questions, resetting state) and how to use st.session_state to manage a multi-level game flow (pages, levels, lives, and final trial) in a single-page app. The CSV-based word bank also reflects my growing awareness of reproducibility: all content is stored in a transparent, editable file, so the game can be extended or audited without changing the core code.
+
+At the same time, this project shows how I began to think like a learning designer who codes. Each level is intentionally tied to a vocabulary category and gradually increases cognitive demands, culminating in a classification task that requires reorganizing all words. The storyline, visuals, and feedback messages are not just decoration but are used to support engagement and learning. Overall, this game is a concrete example of how I can now use programming to prototype interactive learning experiences for my future teaching and research.
