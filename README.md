@@ -2,6 +2,7 @@ Chinese Word Island Adventure 🎮🌴
 An 8-level Streamlit web game designed for beginning learners of Chinese to consolidate vocabulary across seven core categories: family, fruit, animal, verb, place, time, job.
 Players move through different “regions” of the island, answering vocabulary questions and finally sorting all words by category to defeat the monster Lexor.
 https://word-island-adventure.streamlit.app/
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 1. Project Overview
 Main ideas:
